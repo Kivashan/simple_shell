@@ -4,16 +4,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
-#include <sys/types.h>
 #include <fcntl.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 int _putchar(char);
 int _puts(char *);
+int stringlen(char *);
+char *stringcpy(char *);
+int no_of_args(char *, char *);
+char *stringconcat(char *str1, char *str2);
+char *getpath(char **envr);
 void get_prompt();
-/*char *stringconcat(char *str1, char *str2);
-char *stringcpy(char *str);*/
-int stringlen(char *str);
+
+char **the_tokeniser(char *, char *);
+int our_execve(char **, char **);
+
+void free_grid(char **grid);
+
+void get_filename(char *cp_cmd, char *filename, int len, int *pos);
+int file_check(char *tokens[], char *environ[]);
+ssize_t our_getline(char **lineptr, size_t *n, int stream);
+/*file_finder - similar to file_check but handles relative path*/
+int file_finder(char *tokens[], char *environ[]);
+/* functions handling error messages*/
+void cmd_not_found_error(char *argv, char *token);
 
 #endif
