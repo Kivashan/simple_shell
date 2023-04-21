@@ -2,11 +2,11 @@
 
 /**
  * get_prompt - Prints prompt
- * 
+ *
  * Return: Void
  */
 
-void get_prompt()
+void get_prompt(void)
 {
 	_puts("$ ");
 }

@@ -1,5 +1,7 @@
 #include "main.h"
 
+/**
+ */
 int _puts(char *str)
 {
 	int i = 0;
