@@ -21,8 +21,10 @@ void get_prompt();
 char **the_tokeniser(char *, char *);
 int our_execve(char **, char **);
 
+/* functions to free malloc'ed strings */
 void free_grid(char **grid);
 void free_fc(char *, char *, char *);
+void free_ff(char**, char *, char *);
 
 void get_filename(char *cp_cmd, char *filename, int len, int *pos);
 int file_check(char *tokens[], char *environ[]);
