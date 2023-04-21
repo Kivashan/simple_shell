@@ -2,6 +2,7 @@
 
 /**
  * cmd_not_found_error - prints error message on stdout
+ * @argv: the first element of argv
  * @token: the command entered on the cmdline
  *
  * Return: Void
