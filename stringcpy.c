@@ -10,21 +10,21 @@
 char *stringcpy(char *str)
 {
 	int len = 0, i = 0;
-	char *newString;
+	char *new;
 
 	if (!str)
 		return (NULL);
 
 	len = stringlen(str);
-	newString = malloc(sizeof(char) * (len + 1));
+	new = malloc(sizeof(char) * (len + 1));
 	
-	if (!newString)
+	if (!new)
 		return (NULL);
 	while (str[i])
 	{
-		newString[i] = str[i];
+		new[i] = str[i];
 		i++;
 	}
 	
-	return (newString);
+	return (new);
 }
