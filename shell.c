@@ -17,12 +17,12 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 			/*		retval = our_getline(&cmd, &bytes, STDIN_FILENO);*/
 		if (retval == -1)
 		{
-			free(cmd);
+		/*	free(cmd);*/
 			exit(98);
 		}
 		cmd[stringlen(cmd) - 1] = '\0';
 		tokens = the_tokeniser(cmd, delim);
-		free(cmd);
+/*		free(cmd);*/
 		if (file_check(tokens, envp) == 0)
 		{
 			pid = fork();
@@ -39,7 +39,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 		}
 		else
 			cmd_not_found_error(argv[0], tokens[0]); /*error message to match linux*/
-		free_grid(tokens);
+	/*	free_grid(tokens);*/
 	}
 	return (0);
 }

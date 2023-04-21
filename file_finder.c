@@ -34,13 +34,13 @@ int file_finder(char *tokens[], char *environ[])
 		{
 			if ((strcmp(entry->d_name, cp1)) == 0)
 			{
-				free_ff(path_token, path, cp1);
+			/*	free_ff(path_token, path, cp1);*/
 				return (0);
 			}
 		}
 		closedir(fd);
 		i++;
 	}
-	free_ff(path_token, path, cp1);
+	/*free_ff(path_token, path, cp1);*/
 	return (-1);
 }
