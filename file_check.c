@@ -19,15 +19,26 @@ int file_check(char *tokens[], char *environ[])
 			cp2[len] = '\0';
 
 		filename = malloc(sizeof(char) * (len2));
+		if (!filename)
+		{
+			free_fc(filename, cp1, cp2);
+			return (-1);
+		}
 		get_filename(cp1, filename, ++len, &pos);
                 filename[pos] = '\0';
 		fd = opendir(cp2);
 		if (fd == NULL)
+		{
+			free_fc(filename, cp1, cp2);
 			return (-1);
+		}
 		while ((entry = readdir(fd)) != NULL)
 		{
 			if ((strcmp(entry->d_name, filename)) == 0)
+			{
+				free_fc(filename, cp1, cp2);
 				return (0);
+			}
 		}
 		closedir(fd);
 	}
