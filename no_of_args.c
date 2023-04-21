@@ -11,17 +11,17 @@
 int no_of_args(char *str, char *delim)
 {
 	char *tmp = NULL;
-	int len = 0, args = 0;
+	int  args = 0;
 
 	if (!str)
 		return (-1);
 
-	len = stringlen(str);
+/*	len = stringlen(str);
 	tmp = malloc(sizeof(char) * (len + 1));
 
 	if (!tmp)
 		return (-1);
-
+*/
 	tmp = strtok(str, delim);
 	args++;
 
