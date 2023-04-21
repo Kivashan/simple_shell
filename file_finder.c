@@ -27,7 +27,7 @@ int file_finder(char *tokens[], char *environ[])
 		fd = opendir(path_token[i]);
 		if (fd == NULL)
 		{
-			free_ff(path_token, path, cp1);
+		/*	free_ff(path_token, path, cp1);*/
 			return (-1);
 		}
 		while ((entry = readdir(fd)) != NULL)
