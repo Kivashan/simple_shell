@@ -12,18 +12,22 @@
 
 int file_check(char *tokens[], char *environ[])
 {
-	char *cp1, *cp2, *filename;
-	int len = 0, pos = 0, len2 = 0;
-	DIR *fd;
+	char *cp1; /* *cp2 *filename;*/
+	int /*len = 0, pos = 0, len2 = 0,*/ a = 0;
+/*	DIR *fd;
 	struct dirent *entry;
-
+*/
 	cp1 = stringcpy(tokens[0]);
-	cp2 = stringcpy(tokens[0]);
-	len = stringlen(cp2) - 1;
+/*	cp2 = stringcpy(tokens[0]);
+	len = stringlen(cp2) - 1;*/
 
 	if (cp1[0] == '/')
 	{
-		for (; cp2[len] != '/'; len--, len2++)
+		a = access(cp1, F_OK);
+		
+		if (a == 0)
+			return (0);
+		/*for (; cp2[len] != '/'; len--, len2++)
 			cp2[len] = '\0';
 
 		filename = malloc(sizeof(char) * (len2));
@@ -48,7 +52,7 @@ int file_check(char *tokens[], char *environ[])
 				return (0);
 			}
 		}
-		closedir(fd);
+		closedir(fd);*/
 	}
 	else if ((file_finder(tokens, environ)) == 0)
 		return (0);

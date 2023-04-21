@@ -29,6 +29,6 @@ char **the_tokeniser(char *cmd, char *delim)
 		i++;
 	}
 	tokens[i] = NULL;
-	free(cmd_cp);
+/*	free(cmd_cp);*/
 	return (tokens);
 }
