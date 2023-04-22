@@ -10,7 +10,7 @@
 char *stringcpy(char *str)
 {
 	int len = 0, i = 0;
-	char *newString;
+	char *newString = NULL;
 
 	if (!str)
 		return (NULL);

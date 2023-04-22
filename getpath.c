@@ -1,13 +1,10 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
+#include "main.h"
 
 char *getpath(char **envr)
 {
 	char *path = "PATH=";
 	char *return_path;
-	int i, j = 0, k, loc = 0;
+	int i, j = 0, k, loc = 0, len = 0;
 
 
 	for (i = 0; envr[i] != NULL; i++)
@@ -23,7 +20,8 @@ char *getpath(char **envr)
 			if (j == 4)
 				break;
         }
-	return_path = malloc(sizeof(char) * 100);
+	len = stringlen(envr[loc]) - 4;
+	return_path = malloc(sizeof(char) * len);
 	for (k = 0; envr[loc][j] != '\0'; k++, j++)
 	{
 		return_path[k] = envr[loc][j + 1];

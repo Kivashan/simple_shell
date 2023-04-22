@@ -10,13 +10,13 @@ char **the_tokeniser(char *cmd, char *delim)
 		return (NULL);
 	cmd_cp = stringcpy(cmd);
 	args = no_of_args(cmd, delim);
-	tokens = malloc(sizeof(char *) * (args + 1)); /* +1 for null*/
+	tokens = malloc(sizeof(char *) * (args + 1));
 	
 	if (!tokens)
 		return (NULL);
 	 tmp = strtok(cmd_cp, delim);
 	 tokens[0] = tmp;
-	while (tmp != NULL) /* (i = 1; i < args; i++)*/
+	while (tmp != NULL)
 	{
 		len = 0;
 		tmp = strtok(NULL, delim);
@@ -29,6 +29,5 @@ char **the_tokeniser(char *cmd, char *delim)
 		i++;
 	}
 	tokens[i] = NULL;
-/*	free(cmd_cp);*/
 	return (tokens);
 }

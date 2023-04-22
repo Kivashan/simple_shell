@@ -27,10 +27,10 @@ void free_fc(char *, char *, char *);
 void free_ff(char**, char *, char *);
 
 void get_filename(char *cp_cmd, char *filename, int len, int *pos);
-int file_check(char *tokens[], char *environ[], char *fn);
+int file_check(char *tokens[], char *environ[], char **fn);
 ssize_t our_getline(char **lineptr, size_t *n, int stream);
 /*file_finder - similar to file_check but handles relative path*/
-char *file_finder(char *tokens[], char *environ[], char *fn);
+char **file_finder(char *tokens[], char *environ[], char **fn);
 /* functions handling error messages*/
 void cmd_not_found_error(char *argv, char *token);
 

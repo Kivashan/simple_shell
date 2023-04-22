@@ -11,7 +11,7 @@
 char *stringconcat(char *str1, char *str2)
 {
 	int l1, l2;
-	char *new;
+	char *new = NULL;
 	int i = 0, j = 0;
 
 	l1 = stringlen(str1);

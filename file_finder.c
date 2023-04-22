@@ -11,9 +11,9 @@
  * Return: 0 if file exists, -1 otherwise
  */
 
-char *file_finder(char *tokens[], char *environ[], char *filename)
+char **file_finder(char *tokens[], char *environ[], char **filename)
 {
-	char **path_token, *delim = ":", *cp1, *path;
+	char **path_token = NULL, *delim = ":", *cp1 = NULL, *path = NULL;
 	int i = 0;
 	DIR *fd;
 	struct dirent *entry;
@@ -35,13 +35,12 @@ char *file_finder(char *tokens[], char *environ[], char *filename)
 			if ((strcmp(entry->d_name, cp1)) == 0)
 			{
 			/*	free_ff(path_token, path, cp1);*/
-				filename = stringconcat(path_token[i], tokens[0]);
+				*filename = stringconcat(path_token[i], tokens[0]);
 				return (filename);
 			}
 		}
 		closedir(fd);
 		i++;
 	}
-	/*free_ff(path_token, path, cp1);*/
 	return (NULL);
 }
