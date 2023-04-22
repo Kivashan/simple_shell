@@ -11,7 +11,7 @@
  * Return: 0 if file exists, -1 otherwise
  */
 
-int file_finder(char *tokens[], char *environ[])
+char *file_finder(char *tokens[], char *environ[], char *filename)
 {
 	char **path_token, *delim = ":", *cp1, *path;
 	int i = 0;
@@ -28,19 +28,20 @@ int file_finder(char *tokens[], char *environ[])
 		if (fd == NULL)
 		{
 		/*	free_ff(path_token, path, cp1);*/
-			return (-1);
+			return (NULL);
 		}
 		while ((entry = readdir(fd)) != NULL)
 		{
 			if ((strcmp(entry->d_name, cp1)) == 0)
 			{
 			/*	free_ff(path_token, path, cp1);*/
-				return (0);
+				filename = stringconcat(path_token[i], tokens[0]);
+				return (filename);
 			}
 		}
 		closedir(fd);
 		i++;
 	}
 	/*free_ff(path_token, path, cp1);*/
-	return (-1);
+	return (NULL);
 }
