@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * stringconcat - concatenates two strings
+ * @str1: pointer tothe first string
+ * @str2: pointer to the second string
+ *
+ * Return: pointer to anewly malloc'ed string
+ */
+
 char *stringconcat(char *str1, char *str2)
 {
 	int l1, l2;
