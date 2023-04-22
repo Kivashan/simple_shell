@@ -33,5 +33,14 @@ ssize_t our_getline(char **lineptr, size_t *n, int stream);
 char **file_finder(char *tokens[], char *environ[], char **fn);
 /* functions handling error messages*/
 void cmd_not_found_error(char *argv, char *token);
+/*inbuilt*/
+void exec_builtin(char **tok);
+void our_exit(char **tok);
+void print_env(char **tok);
+typedef struct get_inbuilt{
+	char *cmd;
+	void (*func)(char **tokens);
+} get_func;
 
+int stringcomp(char *str1, char *str2);
 #endif
