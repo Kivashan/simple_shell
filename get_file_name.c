@@ -7,7 +7,8 @@
  * @len: length of cp_cmd
  * @pos: pointer to the position of filename
  *
- * @Return: 
+ * Description: extract pathname from full path
+ * Return: void
  */
 
 void get_filename(char *cp_cmd, char *filename, int len, int *pos)

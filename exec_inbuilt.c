@@ -2,7 +2,7 @@
 /**
  * exec_builtin - executes a builtin command via a syscall
  * @tok: user input
- * 
+ *
  * Description: execute function associated with user command
  * Return: void
  */
@@ -41,14 +41,13 @@ void our_exit(__attribute__((unused))char **tok)
  * Description: print environment variables
  * Return: void
  */
-void print_env(__attribute__((unused))char **tok)
+void print_env(char **tok)
 {
 	int i = 0;
-	extern char **environ;
 
-	while (environ[i])
+	while (tok[i])
 	{
-		write (1, environ[i], 1024);
+		write(1, tok[i], 1024);
 		i++;
 	}
 }

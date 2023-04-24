@@ -19,11 +19,9 @@ int file_check(char *tokens[], char *environ[], char **filename)
 	if (cp1[0] == '/')
 	{
 		a = access(cp1, F_OK);
-		
 		if (a == 0)
 		{
 			*filename = cp1;
-			
 			return (0);
 		}
 	}

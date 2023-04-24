@@ -14,8 +14,8 @@ char **the_tokeniser(char *cmd, char *delim)
 	
 	if (!tokens)
 		return (NULL);
-	 tmp = strtok(cmd_cp, delim);
-	 tokens[0] = tmp;
+	tmp = strtok(cmd_cp, delim);
+	tokens[0] = tmp;
 	while (tmp != NULL)
 	{
 		len = 0;
@@ -24,8 +24,8 @@ char **the_tokeniser(char *cmd, char *delim)
 		tokens[i] = malloc(sizeof(char) * (len + 1));
 		if (!tokens[i])
 			return (NULL);
-		
-		tokens[i] = tmp;	
+
+		tokens[i] = tmp;
 		i++;
 	}
 	tokens[i] = NULL;
