@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * getpath - get value of PATH from environment
+ * @envr: pointer to array of strings (environment variables)
+ *
+ * Description: get string of paths to directories with bash commands
+ * Return: a string
+ */
 char *getpath(char **envr)
 {
 	char *path = "PATH=";

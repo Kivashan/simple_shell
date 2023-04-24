@@ -1,5 +1,12 @@
 #include "main.h"
-
+/**
+ * the_tokeniser - split string into array of pointers(strings)
+ * @cmd: the string to split
+ * @delim: a string that is the basis of the splitting
+ *
+ * Description: splits string based on some delimiter delim
+ * Return: pointer to the array of pointers
+ */
 char **the_tokeniser(char *cmd, char *delim)
 {
 	char **tokens;
@@ -11,7 +18,7 @@ char **the_tokeniser(char *cmd, char *delim)
 	cmd_cp = stringcpy(cmd);
 	args = no_of_args(cmd, delim);
 	tokens = malloc(sizeof(char *) * (args + 1));
-	
+
 	if (!tokens)
 		return (NULL);
 	tmp = strtok(cmd_cp, delim);

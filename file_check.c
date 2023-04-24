@@ -6,6 +6,7 @@
  * file_check - Checks if file exists in the directories stored under PATH
  * @tokens: an array of pointers to strings storing the cmd args
  * @environ: The environment variable
+ * @filename: name of file/cmd extracted from full path
  *
  * Return: 0 if success, -1 otherwise;
  */
