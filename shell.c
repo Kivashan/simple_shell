@@ -2,18 +2,12 @@
 
 int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 {
-	/*int retval = 0, pid, status, int_mode = 1;
-	size_t bytes = 120; can later assign value if getline does not work properly
-	char **tokens, *filename = NULL;
-	char *delim = " ";
-*/
 	while(1)
 	{
-		char *cmd = NULL;
+		char *cmd = NULL, *delim = " ";
 		int retval = 0, pid, status, int_mode = 1;
 		size_t bytes = 120;
 		char **tokens, *filename = NULL;
-		char *delim = " ";
 
 		int_mode = isatty(STDIN_FILENO);
 		if (int_mode)
@@ -35,7 +29,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 				return (1);
 			}
 			else if (pid == 0)
-				retval = our_execve(tokens, envp, filename);/*what could cause execve to fail? check*/
+				retval = our_execve(tokens, envp, filename);
 			else
 			{	
 				wait(&status);
