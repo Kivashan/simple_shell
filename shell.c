@@ -36,10 +36,10 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 			}
 
 		}
+		else if (file_check(tokens, envp, &filename) != 0)
+			exec_builtin(tokens);
 		else
-		{
 			cmd_not_found_error(argv[0], tokens[0]);
-		}
 	}
 	return (0);
 }
