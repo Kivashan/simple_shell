@@ -4,9 +4,9 @@
 
 /**
  * file_finder - checks to see if file exists in the paths stored in the PATH
- * variable
  * @tokens: An array of pointers to strings
  * @environ: Environment variable
+ * @filename: A string - full path to command
  *
  * Return: 0 if file exists, -1 otherwise
  */

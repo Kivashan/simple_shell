@@ -15,12 +15,12 @@ int no_of_args(char *str, char *delim)
 
 	if (!str)
 		return (-1);
-
-/*	len = stringlen(str);
-	tmp = malloc(sizeof(char) * (len + 1));
-
-	if (!tmp)
-		return (-1);
+/*
+*	len = stringlen(str);
+*	tmp = malloc(sizeof(char) * (len + 1));
+*
+*	if (!tmp)
+*		return (-1);
 */
 	tmp = strtok(str, delim);
 	args++;

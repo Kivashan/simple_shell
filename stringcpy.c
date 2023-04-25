@@ -17,7 +17,7 @@ char *stringcpy(char *str)
 
 	len = stringlen(str);
 	newString = malloc(sizeof(char) * (len + 1));
-	
+
 	if (!newString)
 		return (NULL);
 	while (str[i])
@@ -25,6 +25,6 @@ char *stringcpy(char *str)
 		newString[i] = str[i];
 		i++;
 	}
-	
+
 	return (newString);
 }

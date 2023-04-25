@@ -17,7 +17,7 @@ char *stringcpy(char *);
 int no_of_args(char *, char *);
 char *stringconcat(char *str1, char *str2);
 char *getpath(char **envr);
-void get_prompt();
+void get_prompt(void);
 
 char **the_tokeniser(char *, char *);
 int our_execve(char **, char **, char *);
@@ -37,7 +37,13 @@ void cmd_not_found_error(char *argv, char *token);
 void exec_builtin(char **tok);
 void our_exit(char **tok);
 void print_env(char **tok);
-typedef struct get_inbuilt{
+/**
+ * struct get_inbuilt - holds a string and a function pointer
+ * @cmd: command
+ * @func: pointer to function corresponding to command
+ */
+typedef struct get_inbuilt
+{
 	char *cmd;
 	void (*func)(char **tokens);
 } get_func;
