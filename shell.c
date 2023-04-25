@@ -13,7 +13,6 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 		if (int_mode)
 			get_prompt();
 		retval = getline(&cmd, &bytes, stdin);
-			/*		retval = our_getline(&cmd, &bytes, STDIN_FILENO);*/
 		if (retval == -1)
 		{
 			exit(98);
