@@ -49,4 +49,5 @@ typedef struct get_inbuilt
 } get_func;
 
 int stringcomp(char *str1, char *str2);
+void sig_handler(int sig);
 #endif

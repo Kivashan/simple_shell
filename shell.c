@@ -34,13 +34,15 @@ int main(__attribute__((unused))int argc, char *argv[], char *envp[])
 				return (1);
 			}
 			else if (pid == 0)
+			{
+/*				signal(SIGINT, &sig_handler);*/
 				retval = our_execve(tokens, envp, filename);
-			/*what could cause execve to fail? check*/
+			}
 			else
 				wait(&status);
 		}
-		else if (file_check(tokens, envp, &filename) != 0)
-			exec_builtin(envp);
+/*		else if (file_check(tokens, envp, &filename) != 0)
+			exec_builtin(envp);*/
 		else
 			cmd_not_found_error(argv[0], tokens[0]);
 	}
