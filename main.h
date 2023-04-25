@@ -3,40 +3,32 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <string.h>
+#include <signal.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
-int _putchar(char);
-int _puts(char *);
-int stringlen(char *);
-char *stringcpy(char *);
-int no_of_args(char *, char *);
-char *stringconcat(char *str1, char *str2);
-char *getpath(char **envr);
-void get_prompt(void);
-
-char **the_tokeniser(char *, char *);
-int our_execve(char **, char **, char *);
-
-/* functions to free malloc'ed strings */
-void free_grid(char **grid);
-void free_fc(char *, char *, char *);
-void free_ff(char**, char *, char *);
-
-void get_filename(char *cp_cmd, char *filename, int len, int *pos);
-int file_check(char *tokens[], char *environ[], char **fn);
-ssize_t our_getline(char **lineptr, size_t *n, int stream);
-/*file_finder - similar to file_check but handles relative path*/
-char **file_finder(char *tokens[], char *environ[], char **fn);
-/* functions handling error messages*/
-void cmd_not_found_error(char *argv, char *token);
-/*inbuilt*/
-void exec_builtin(char **tok);
-void our_exit(char **tok);
-void print_env(char **tok);
+int get_prompt(void);
+void getline_error_handler(char *);
+char **word_split(char *str, char *delim);
+int no_of_args(char *str, char *delim);
+void free_grid(char **grid, int height);
+char *_strdup(char *str);
+int _strlen(char *str);
+char *_strcpy(char *dest, char *src);
+char *_getenv(char *var);
+char *_strconcat(char *str1, char *str2);
+char **waymaker(int *i);
+char **abs_path(char *token[]);
+int file_check(char *tokens[]);
+int exec_builtin(char **, char **);
+void our_exit(char **tok, char **env);
+void print_env(char **, char **env);
+int stringcomp(char *, char *);
+int our_execve(char *tokens[], char *environ[], char *fn);
 /**
  * struct get_inbuilt - holds a string and a function pointer
  * @cmd: command
@@ -44,9 +36,9 @@ void print_env(char **tok);
  */
 typedef struct get_inbuilt
 {
-	char *cmd;
-	void (*func)(char **tokens);
+        char *cmd;
+        void (*func)(char **tokens, char **env);
 } get_func;
+void cmd_not_found_error(char *argv, char *token);
 
-int stringcomp(char *str1, char *str2);
 #endif

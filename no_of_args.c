@@ -1,34 +1,24 @@
 #include "main.h"
 
-/**
- * no_of_args - returns the number of command line args passed
- * @str: string
- * @delim: delimeter
- *
- * Return: The number of cmd args passed
- */
-
 int no_of_args(char *str, char *delim)
 {
-	char *tmp = NULL;
-	int  args = 0;
+	char *tmp = NULL, *new = NULL;
+	int args = 0;
 
 	if (!str)
 		return (-1);
-/*
-*	len = stringlen(str);
-*	tmp = malloc(sizeof(char) * (len + 1));
-*
-*	if (!tmp)
-*		return (-1);
-*/
-	tmp = strtok(str, delim);
-	args++;
 
-	while (!tmp)
+	tmp = _strdup(str);
+
+	new = strtok(tmp, delim);
+	args++;
+	while (new != NULL)
 	{
-		tmp = strtok(str, delim);
+		new = strtok(NULL, delim);
 		args++;
 	}
+	free(tmp);
+	free(new);
+
 	return (args);
 }

@@ -1,33 +1,37 @@
 #include "main.h"
-#include <sys/types.h>
-#include <dirent.h>
 
-/**
- * file_check - Checks if file exists in the directories stored under PATH
- * @tokens: an array of pointers to strings storing the cmd args
- * @environ: The environment variable
- * @filename: name of file/cmd extracted from full path
- *
- * Return: 0 if success, -1 otherwise;
- */
-
-int file_check(char *tokens[], char *environ[], char **filename)
+int file_check(char *tokens[])
 {
-	char *cp1 = NULL;
-	int a = 0;
+	char **path = NULL, *tmp;
+	struct stat st;
+	int i = 0, size = 0;
 
-	cp1 = stringcpy(tokens[0]);
-	if (cp1[0] == '/')
+	if (tokens[0][0] == '/')
 	{
-		a = access(cp1, F_OK);
-		if (a == 0)
+		if (stat(tokens[0], &st) == 0)
+			return (0);
+		else
+			return (-1);
+	}
+
+	path = abs_path(tokens);
+	while (path[size] != NULL)
+		size++;
+
+	while (path[i])
+	{
+		if (stat(path[i], &st) == 0)
 		{
-			*filename = cp1;
+			tmp = tokens[0];
+			tokens[0] = _strdup(path[i]);
+			free(tmp);
+			free_grid(path, size);
 			return (0);
 		}
+		i++;
 	}
-	else if ((file_finder(tokens, environ, filename)) != NULL)
-		return (0);
-	free(cp1);
+	
+	free_grid(path, size);
+
 	return (-1);
 }

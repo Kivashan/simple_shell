@@ -1,12 +1,12 @@
 #include "main.h"
 
-/**
- * get_prompt - Prints prompt
- *
- * Return: Void
- */
-
-void get_prompt(void)
+int get_prompt(void)
 {
-	_puts("$ ");
-}
+	int retval;
+
+	retval = write(STDOUT_FILENO, "$ ", 2);
+
+	if (retval == -1)
+		exit(-1);
+	return (retval);
+}	

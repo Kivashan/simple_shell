@@ -10,8 +10,13 @@
 
 void cmd_not_found_error(char *argv, char *token)
 {
-	_puts(argv);
-	_puts(": 1: ");
-	_puts(token);
-	_puts(": not found\n");
+	int len;
+
+	len = _strlen(argv);
+	write(1, argv, len);
+	len = _strlen(token);
+	write(1, ": 1: ", 5);
+	write(1, token, len);
+	write(1, ": not found\n", 12);
+	exit(127);
 }

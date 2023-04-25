@@ -6,14 +6,14 @@
  *
  * Return: length of string on success, -1 on error
  */
-int stringlen(char *str)
+int _strlen(char *str)
 {
 	int i = 0;
 
 	if (!str)
 		return (-1);
 
-	while (str[i])
+	while(str[i])
 		i++;
 
 	return (i);

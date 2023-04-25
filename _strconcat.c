@@ -8,14 +8,14 @@
  * Return: pointer to anewly malloc'ed string
  */
 
-char *stringconcat(char *str1, char *str2)
+char *_strconcat(char *str1, char *str2)
 {
 	int l1, l2;
 	char *new = NULL;
 	int i = 0, j = 0;
 
-	l1 = stringlen(str1);
-	l2 = stringlen(str2);
+	l1 = _strlen(str1);
+	l2 = _strlen(str2);
 
 	new = malloc(sizeof(char) * (l1 + l2 + 2));
 

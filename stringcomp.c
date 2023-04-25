@@ -13,6 +13,8 @@ int stringcomp(char *str1, char *str2)
 
 	if (!str1 || !str2)
 		return (-1);
+	if (_strlen(str1) != _strlen(str2))
+		return (-1);
 	while (str1[i] &&  str2[i])
 	{
 		if (str1[i] != str2[i])
