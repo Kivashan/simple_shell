@@ -34,10 +34,31 @@ int exec_builtin(char **tok, char **env)
  * Description: exits current process
  * Return: void
  */
-void our_exit(__attribute__((unused))char **tok,
-	__attribute__((unused))char **env)
+void our_exit(char **tok, __attribute__((unused))char **env)
 {
-	exit(EXIT_SUCCESS);
+	int len = 0, i = 0, sig_fig = 1, num = 0;
+
+	while (tok[1][i])
+	{
+		if ((tok[1][i] < '0') || (tok[1][i] > '9'))
+		{
+			write(1, tok[1], 10);
+			write(1, " :invalid number", 15);
+		}
+		i++;
+		len++;
+		sig_fig *= 10;
+	}
+
+	sig_fig /= 10;
+
+	for (i = 0; tok[1][i]; i++)
+	{
+		num += (tok[1][i] - 48) * sig_fig;
+		sig_fig /= 10;
+	}
+
+	exit(num);
 }
 /**
  * print_env - print environment variables
