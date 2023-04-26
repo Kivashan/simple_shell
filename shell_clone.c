@@ -47,6 +47,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			}
 			free(filename);
 			free_grid(tokens, args);
+			free_str(buffer, getline_cp);
 		}
 		else
 			free_str(buffer, getline_cp);
