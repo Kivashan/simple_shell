@@ -40,5 +40,6 @@ typedef struct get_inbuilt
         void (*func)(char **tokens, char **env);
 } get_func;
 void cmd_not_found_error(char *argv, char *token);
+void _fork(char **tokens, char **env, char **argv, char *filename);
 
 #endif
