@@ -1,7 +1,15 @@
 #include "main.h"
 
-void free_str(char *buffer, char *filename, char *getline_cp,
-		char **tokens, int args);
+void free_str(char *buffer, char *filename, char *getline_cp);
+
+/**
+ * main - Entry point
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: environment variables
+ * 
+ * Return: 0 is success
+ */
 
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
@@ -10,7 +18,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 	while (1)
 	{
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
-		int mode = 0, args = 0, retval = 0, retvalb = 0, pid, status;
+		int mode = 0, args = 0, retval = 0, retvalb = 0;
 
 		mode = isatty(STDIN_FILENO);
 		if (mode)
@@ -26,7 +34,8 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		retvalb = exec_builtin(tokens, env);
 		if (retvalb == -1)
 		{
-			retval = file_check(tokens, env);
+			_fork(tokens, env, argv, filename);
+/*			retval = file_check(tokens, env);
 			pid = fork();
 			if (pid == -1)
 			{
@@ -42,8 +51,9 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			}
 			else 
 				wait(&status);
-		}
-		free_str(buffer, filename, getline_cp, tokens, args);
+*/		}
+		free_str(buffer, filename, getline_cp);
+		free_grid(tokens, args);		
 	}
 	return(0);
 }
@@ -59,11 +69,11 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
  * Return: Void
  */
 
-void free_str(char *buffer, char *filename, char *getline_cp,
-		 char **tokens, int args)
+void free_str(char *buffer, char *filename, char *getline_cp)
 {
+
 	free(buffer);
-	free_grid(tokens, args);
 	free(filename);
 	free(getline_cp);
+
 }
