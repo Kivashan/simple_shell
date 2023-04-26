@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * waymaker - splits the path variable into tokens
+ * @num: a pointer to an int, used to track the size of the array of pointers
+ *
+ * Return: an array of pointers to strings
+ */
+
 char **waymaker(int *num)
 {
 	char **the_narrows = NULL;

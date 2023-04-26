@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * word_split - splits a string into tokens
+ * @str: a string
+ * @delim: delimeter for splitting the string
+ *
+ * Return: An array of pointers if successful, NULL otherwise
+ */
+
 char **word_split(char *str, char *delim)
 {
 	char **new = NULL;
@@ -9,7 +17,7 @@ char **word_split(char *str, char *delim)
 
 	args = no_of_args(str, delim);
 
-	new = malloc(sizeof(char* ) * args);
+	new = malloc(sizeof(char *) * args);
 	if (!new)
 		return (NULL);
 
