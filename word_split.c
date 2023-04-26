@@ -9,7 +9,7 @@ char **word_split(char *str, char *delim)
 
 	args = no_of_args(str, delim);
 
-	new = malloc(sizeof(char* ) * args);
+	new = malloc(sizeof(char *) * args);
 	if (!new)
 		return (NULL);
 

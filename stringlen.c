@@ -13,7 +13,7 @@ int _strlen(char *str)
 	if (!str)
 		return (-1);
 
-	while(str[i])
+	while (str[i])
 		i++;
 
 	return (i);

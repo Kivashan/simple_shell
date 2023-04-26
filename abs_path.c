@@ -1,11 +1,11 @@
 #include "main.h"
 
-char **abs_path(char *token[])
+char **abs_path(char *token[], char **env)
 {
 	int i = 0, len = 0, j = 0, k = 0, l = 0;
 	char **absolute_path = NULL, **path = NULL;
-	
-	path = waymaker(&i);
+
+	path = waymaker(&i, env);
 	absolute_path = malloc(sizeof(char *) * (i + 1));
 	if (!absolute_path)
 		return (NULL);
@@ -38,4 +38,4 @@ char **abs_path(char *token[])
 	absolute_path[j] = NULL;
 	free_grid(path, i);
 	return (absolute_path);
-}	
+}
