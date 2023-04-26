@@ -3,6 +3,7 @@
 /**
  * waymaker - splits the path variable into tokens
  * @num: a pointer to an int, used to track the size of the array of pointers
+ * @env: an array of pointers to strings
  *
  * Return: an array of pointers to strings
  */

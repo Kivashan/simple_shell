@@ -7,7 +7,7 @@ void free_str(char *buffer, char *filename, char *getline_cp);
  * @argc: argument count
  * @argv: argument vector
  * @env: environment variables
- * 
+ *
  * Return: 0 is success
  */
 
@@ -35,27 +35,11 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		if (retvalb == -1)
 		{
 			_fork(tokens, env, argv, filename);
-/*			retval = file_check(tokens, env);
-			pid = fork();
-			if (pid == -1)
-			{
-				perror("Error:");
-				exit(98);
-			}
-			else if (pid == 0)
-			{
-				if (retval == 0)
-					our_execve(tokens, env, tokens[0]);
-				else
-					cmd_not_found_error(argv[0], filename);
-			}
-			else 
-				wait(&status);
-*/		}
+		}
 		free_str(buffer, filename, getline_cp);
-		free_grid(tokens, args);		
+		free_grid(tokens, args);
 	}
-	return(0);
+	return (0);
 }
 
 /**
@@ -63,8 +47,6 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
  * @buffer: strinh to free
  * @filename: string to free
  * @getline_cp: string to free
- * @tokens: an array of pointers to strings that needs to be freed
- * @args: size of array of pointers
  *
  * Return: Void
  */

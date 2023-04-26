@@ -2,12 +2,11 @@
 
 /**
  * _fork - handles the fork
- * @tokesn: an array of pointers to strings
+ * @tokens: an array of pointers to strings
  * @env: an array of pointers to strings, specifically env variables
  * @argv: the argv[0] string
  * @filename: a string containing the absolute path of a file
  *
-
  * Return: Void
  */
 
