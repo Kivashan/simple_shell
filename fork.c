@@ -28,6 +28,6 @@ void _fork(char **tokens, char **env, char **argv, char *filename)
 		else
 			cmd_not_found_error(argv[0], filename);
 	}
-		else
-			wait(&status);
+	else
+		wait(&status);
 }
