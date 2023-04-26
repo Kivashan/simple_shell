@@ -1,6 +1,6 @@
 #include "main.h"
 
-int file_check(char *tokens[])
+int file_check(char *tokens[], char **env)
 {
 	char **path = NULL, *tmp;
 	struct stat st;
@@ -14,7 +14,7 @@ int file_check(char *tokens[])
 			return (-1);
 	}
 
-	path = abs_path(tokens);
+	path = abs_path(tokens, env);
 	while (path[size] != NULL)
 		size++;
 
@@ -30,7 +30,7 @@ int file_check(char *tokens[])
 		}
 		i++;
 	}
-	
+
 	free_grid(path, size);
 
 	return (-1);

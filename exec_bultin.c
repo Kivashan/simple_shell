@@ -33,7 +33,7 @@ int exec_builtin(char **tok, char **env)
  * Return: void
  */
 void our_exit(__attribute__((unused))char **tok,
-	       	__attribute__((unused))char **env)
+	__attribute__((unused))char **env)
 {
 	exit(EXIT_SUCCESS);
 }

@@ -7,11 +7,11 @@
  * Return: an array of pointers to strings
  */
 
-char **waymaker(int *num)
+char **waymaker(int *num, char **env)
 {
 	char **the_narrows = NULL;
 	char *var = "PATH";
-	char *path = _getenv(var);
+	char *path = _getenv(var, env);
 	char *delim = ":";
 	int i = 0;
 

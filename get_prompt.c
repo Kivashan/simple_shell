@@ -9,4 +9,4 @@ int get_prompt(void)
 	if (retval == -1)
 		exit(-1);
 	return (retval);
-}	
+}
