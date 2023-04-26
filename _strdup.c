@@ -1,5 +1,10 @@
 #include "main.h"
-
+/**
+ * _strdup - duplicate a string
+ * @str: string to duplicate
+ *
+ * Return: pointer to a newly allocated mem location with duplicate
+ */
 char *_strdup(char *str)
 {
 	int len = 0, i = 0;
