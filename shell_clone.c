@@ -1,6 +1,6 @@
 #include "main.h"
 
-void free_str(char *buffer, char *filename, char *getline_cp);
+void free_str(char *buffer, char *getline_cp);
 
 /**
  * main - Entry point
@@ -36,15 +36,20 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		buffer[_strlen(buffer) - 1] = '\0';
 		getline_cp = _strdup(buffer);
 		args = no_of_args(buffer, delim);
-		tokens = word_split(getline_cp, delim);
-		filename = _strdup(tokens[0]);
-		retvalb = exec_builtin(tokens, env);
-		if (retvalb == -1)
+		if (args > 1)
 		{
-			_fork(tokens, env, argv, filename);
+			tokens = word_split(getline_cp, delim);
+			filename = _strdup(tokens[0]);
+			retvalb = exec_builtin(tokens, env);
+			if (retvalb == -1)
+			{
+				_fork(tokens, env, argv, filename);
+			}
+			free(filename);
+			free_grid(tokens, args);
 		}
-		free_str(buffer, filename, getline_cp);
-		free_grid(tokens, args);
+		else
+			free_str(buffer, getline_cp);
 	}
 	return (0);
 }
@@ -52,17 +57,15 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 /**
  * free_str - frees all dynamically allocated memory in shell_clone.c
  * @buffer: strinh to free
- * @filename: string to free
  * @getline_cp: string to free
  *
  * Return: Void
  */
 
-void free_str(char *buffer, char *filename, char *getline_cp)
+void free_str(char *buffer, char *getline_cp)
 {
 
 	free(buffer);
-	free(filename);
 	free(getline_cp);
 
 }
