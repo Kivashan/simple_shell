@@ -1,5 +1,8 @@
 #include "main.h"
 
+void free_str(char *buffer, char *filename, char *getline_cp,
+		char **tokens, int args);
+
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
 	size_t bytes;
@@ -39,11 +42,28 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			}
 			else 
 				wait(&status);
-		}		
-		free(buffer);
-		free_grid(tokens, args);
-		free(filename);
-		free(getline_cp);
+		}
+		free_str(buffer, filename, getline_cp, tokens, args);		
 	}
 	return(0);
+}
+
+/**
+ * free_str - frees all dynamically allocated memory in shell_clone.c
+ * @buffer: strinh to free
+ * @filename: string to free
+ * @getline_cp: string to free
+ * @tokens: an array of pointers to strings that needs to be freed
+ * @args: size of array of pointers
+ *
+ * Return: Void
+ */
+
+void free_str(char *buffer, char *filename, char *getline_cp,
+		 char **tokens, int args)
+{
+	free(buffer);
+	free_grid(tokens, args);
+	free(filename);
+	free(getline_cp);
 }
