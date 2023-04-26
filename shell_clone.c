@@ -22,6 +22,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		int mode = 0, args = 0, retvalb = 0;
 		int a = 0;
 
+		retval = 0;
 		mode = isatty(STDIN_FILENO);
 		if (mode)
 		{
@@ -49,6 +50,8 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			free(filename);
 			free_grid(tokens, args);
 			free_str(buffer, getline_cp);
+			if (retval == 127)
+				return (retval);
 		}
 		else
 			free_str(buffer, getline_cp);
