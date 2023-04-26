@@ -14,11 +14,12 @@ void free_str(char *buffer, char *getline_cp);
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
 	size_t bytes;
+	int retval = 0;
 
 	while (1)
 	{
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
-		int mode = 0, args = 0, retval = 0, retvalb = 0;
+		int mode = 0, args = 0, retvalb = 0;
 		int a = 0;
 
 		mode = isatty(STDIN_FILENO);
@@ -43,7 +44,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			retvalb = exec_builtin(tokens, env);
 			if (retvalb == -1)
 			{
-				_fork(tokens, env, argv, filename);
+				retval = _fork(tokens, env, argv, filename);
 			}
 			free(filename);
 			free_grid(tokens, args);
@@ -52,7 +53,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		else
 			free_str(buffer, getline_cp);
 	}
-	return (0);
+	return (retval);
 }
 
 /**
