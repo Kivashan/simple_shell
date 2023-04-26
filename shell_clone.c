@@ -23,14 +23,14 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 
 		mode = isatty(STDIN_FILENO);
 		if (mode)
-		{	
+		{
 			retval = get_prompt();
 			a = 1;
 		}
 		retval = getline(&buffer, &bytes, stdin);
 		if (retval == -1)
 		{
-			write(1, "\n", a);	
+			write(1, "\n", a);
 			getline_error_handler(buffer);
 		}
 		buffer[_strlen(buffer) - 1] = '\0';
