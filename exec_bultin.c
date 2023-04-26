@@ -2,6 +2,7 @@
 /**
  * exec_builtin - executes a builtin command via a syscall
  * @tok: user input
+ * @env: environment
  *
  * Description: execute function associated with user command
  * Return: void
@@ -28,6 +29,7 @@ int exec_builtin(char **tok, char **env)
 /**
  * our_exit - wrapper to exit syscall
  * @tok: unused user command for typedef compliance
+ * @env: environment
  *
  * Description: exits current process
  * Return: void
@@ -40,6 +42,7 @@ void our_exit(__attribute__((unused))char **tok,
 /**
  * print_env - print environment variables
  * @tok: unused variable holding user input
+ * @env: environment
  *
  * Description: print environment variables
  * Return: void

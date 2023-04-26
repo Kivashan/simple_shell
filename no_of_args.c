@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * no_of_args - count number of arguments
+ * @str: user input
+ * @delim: space delimiting arguments
+ *
+ * Return: number of args
+ */
 int no_of_args(char *str, char *delim)
 {
 	char *tmp = NULL, *new = NULL;

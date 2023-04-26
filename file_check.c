@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * file_check - check if an external  command exists
+ * @tokens: user input
+ * @env: environment
+ *
+ * Return: 0 success!
+ */
 int file_check(char *tokens[], char **env)
 {
 	char **path = NULL, *tmp;

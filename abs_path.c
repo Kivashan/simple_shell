@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * abs_path - creates absolute path if user only give cmd name
+ * @token: tokenised user input
+ * @env: the environment
+ *
+ * Return: Pointer to pointer
+ */
 char **abs_path(char *token[], char **env)
 {
 	int i = 0, len = 0, j = 0, k = 0, l = 0;

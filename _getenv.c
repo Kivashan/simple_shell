@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * _getenv - get value of environment variable
+ * @var: Some environment variable
+ * @env: the environment
+ *
+ * Return: the value of var
+ */
 char *_getenv(char *var, char **env)
 {
 	char *path;
@@ -23,7 +29,7 @@ char *_getenv(char *var, char **env)
 	}
 	len = _strlen(env[loc]) - 4;
 	path = malloc(sizeof(char) * len);
-	
+
 	for (k = 0; env[loc][j + 2] != '\0'; k++)
 	{
 		path[k] = env[loc][j + 2];

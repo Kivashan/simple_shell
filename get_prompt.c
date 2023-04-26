@@ -1,5 +1,9 @@
 #include "main.h"
-
+/**
+ * get_prompt - print the prompt
+ *
+ * Return: bytes written
+ */
 int get_prompt(void)
 {
 	int retval;

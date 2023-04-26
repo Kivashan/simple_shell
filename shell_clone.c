@@ -13,12 +13,12 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		int mode = 0, args = 0, retval = 0, retvalb = 0, pid, status;
 
 		mode = isatty(STDIN_FILENO);
-		if (mode) 
+		if (mode)
 			retval = get_prompt();
 		retval = getline(&buffer, &bytes, stdin);
-		if (retval == -1) 
+		if (retval == -1)
 			getline_error_handler(buffer);
-		buffer[_strlen(buffer) - 1] = '\0';	
+		buffer[_strlen(buffer) - 1] = '\0';
 		getline_cp = _strdup(buffer);
 		args = no_of_args(buffer, delim);
 		tokens = word_split(getline_cp, delim);
@@ -35,15 +35,15 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			}
 			else if (pid == 0)
 			{
-				if (retval == 0) 
+				if (retval == 0)
 					our_execve(tokens, env, tokens[0]);
-				else 
+				else
 					cmd_not_found_error(argv[0], filename);
 			}
 			else 
 				wait(&status);
 		}
-		free_str(buffer, filename, getline_cp, tokens, args);		
+		free_str(buffer, filename, getline_cp, tokens, args);
 	}
 	return(0);
 }
