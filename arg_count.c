@@ -8,7 +8,7 @@
 
 int arg_count(void)
 {
-	static count = 1;
+	static int count = 1;
 	count++;
 
 	return (count);

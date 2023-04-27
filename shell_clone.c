@@ -35,7 +35,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		{
 			write(1, "\n", a);
 			/*printf("retval2 = %d\n", retval);*/
-			getline_error_handler(buffer, retval);
+			getline_error_handler(buffer, retvalb);
 		}
 		buffer[_strlen(buffer) - 1] = '\0';
 		getline_cp = _strdup(buffer);
