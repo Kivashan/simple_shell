@@ -15,6 +15,7 @@ int _fork(char **tokens, char **env, char **argv, char *filename)
 	int retval = 0, pid = 0, status, exit_status = 0;
 
 	retval = file_check(tokens, env);
+		
 	pid = fork();
 	if (pid == -1)
 	{
@@ -27,8 +28,8 @@ int _fork(char **tokens, char **env, char **argv, char *filename)
 			our_execve(tokens, env, tokens[0]);
 		else
 		{
-			cmd_not_found_error(argv[0], filename);
-			exit_status = 127;
+				cmd_not_found_error(argv[0], filename);
+				exit_status = 127;
 		}
 	}
 	else

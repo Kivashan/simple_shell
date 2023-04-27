@@ -8,9 +8,9 @@
  * Description: execute function associated with user command
  * Return: void
  */
-int exec_builtin(char **tok, char **env, char *filename)
+int exec_builtin(char **tok, char **env, char *filename, char *argv[])
 {
-	int i;
+	int i, retval, pid, status;
 	get_func inbuilt[] = {
 		{"exit", our_exit},
 		{"env", print_env},
@@ -22,8 +22,21 @@ int exec_builtin(char **tok, char **env, char *filename)
 		if ((stringcomp(inbuilt[i].cmd, tok[0])) == 0)
 		{
 			free(filename);
-			(*inbuilt[i].func)(tok, env);
-			return (0);
+			retval = (*inbuilt[i].func)(tok, env, argv);
+			if (retval == 2)
+			{
+				pid = fork();
+				if (pid == -1)
+				{
+					perror("Error:");
+					exit(98);
+				}
+				else if (pid == 0)
+					_exit(2);
+				else
+					wait(&status);
+			}
+			return (retval);
 		}
 	}
 	return (-1);
@@ -36,30 +49,37 @@ int exec_builtin(char **tok, char **env, char *filename)
  * Description: exits current process
  * Return: void
  */
-void our_exit(char **tok, __attribute__((unused))char **env)
+int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 {
-	int len = 0, i = 0, sig_fig = 1, num = 0;
+	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0;
+	
+	while (tok[j])
+		j++;
 
-	while (tok[1][i])
-	{
-		if ((tok[1][i] < '0') || (tok[1][i] > '9'))
+	if (tok[1])
+	{	
+		while (tok[1][i])
 		{
-			write(1, tok[1], 10);
-			write(1, " :invalid number", 15);
+			if ((tok[1][i] < '0') || (tok[1][i] > '9'))
+			{
+				illegal_num_error(tok, argv);
+				free_grid(tok, j);
+				return (2);
+			}
+			i++;
+			len++;
+			sig_fig *= 10;
 		}
-		i++;
-		len++;
-		sig_fig *= 10;
-	}
 
-	sig_fig /= 10;
-
-	for (i = 0; tok[1][i]; i++)
-	{
-		num += (tok[1][i] - 48) * sig_fig;
 		sig_fig /= 10;
+
+		for (i = 0; tok[1][i]; i++)
+		{
+			num += (tok[1][i] - 48) * sig_fig;
+			sig_fig /= 10;
+		}
 	}
-	free_grid(tok, len);
+	free_grid(tok, j);
 	exit(num);
 }
 /**
@@ -70,8 +90,9 @@ void our_exit(char **tok, __attribute__((unused))char **env)
  * Description: print environment variables
  * Return: void
  */
-void print_env(__attribute__((unused))char **tok, char **env)
-	
+int print_env(__attribute__((unused))char **tok, char **env,
+	__attribute__((unused))char *argv[])
+
 {
 	int i = 0, len;
 
@@ -82,4 +103,20 @@ void print_env(__attribute__((unused))char **tok, char **env)
 		write(1, "\n", 1);
 		i++;
 	}
+	return (0);
+}
+
+void illegal_num_error (char **tok, char *argv[])
+{
+	int len = 0;
+
+	len = _strlen(argv[0]);
+	write(1, argv[0], len);
+	write(1, ": 1: ", 5);
+	len = _strlen(tok[0]);
+	write(1, tok[0], len);
+	write(1, ": Illegal number: ", 18);
+	len = _strlen(tok[1]);
+	write(1, tok[1], len);
+	write(1, "\n", 1);
 }

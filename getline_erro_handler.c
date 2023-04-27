@@ -5,8 +5,8 @@
  *
  * Return: void
  */
-void getline_error_handler(char *buffer)
+void getline_error_handler(char *buffer, int retval)
 {
 	free(buffer);
-	exit(0);
+	_exit(retval);
 }
