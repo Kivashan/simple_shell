@@ -47,7 +47,7 @@ int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 		j++;
 
 	err = errno;
-	if (!tok[j])
+	if (!tok[j] && j == 0)
 	{
 		errno = 0;
 		free_grid(tok, j);
