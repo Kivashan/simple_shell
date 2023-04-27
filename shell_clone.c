@@ -51,7 +51,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			free(filename);
 			free_grid(tokens, args);
 			if (retval == 127)
-				return (retval);
+				 exit(retval);
 		}
 		else
 			free_str(buffer, getline_cp);

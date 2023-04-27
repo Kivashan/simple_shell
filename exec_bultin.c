@@ -46,7 +46,7 @@ void our_exit(char **tok,
 
 	free_grid(tok, i);
 
-	exit(EXIT_SUCCESS);
+	exit(2);
 }
 /**
  * print_env - print environment variables
