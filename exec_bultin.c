@@ -10,7 +10,7 @@
  */
 int exec_builtin(char **tok, char **env, char *filename, char *argv[])
 {
-	int i, retval, pid, status;
+	int i, retval; /*pid, status;*/
 	get_func inbuilt[] = {
 		{"exit", our_exit},
 		{"env", print_env},
@@ -23,19 +23,6 @@ int exec_builtin(char **tok, char **env, char *filename, char *argv[])
 		{
 			free(filename);
 			retval = (*inbuilt[i].func)(tok, env, argv);
-			if (retval == 2)
-			{
-				pid = fork();
-				if (pid == -1)
-				{
-					perror("Error:");
-					exit(98);
-				}
-				else if (pid == 0)
-					_exit(2);
-				else
-					wait(&status);
-			}
 			return (retval);
 		}
 	}
