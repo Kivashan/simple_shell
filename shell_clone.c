@@ -14,26 +14,27 @@ void free_str(char *buffer, char *getline_cp);
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
 	size_t bytes;
-	int retval = 0;
 
 	while (1)
 	{
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
 		int mode = 0, args = 0, retvalb = 0;
-		int a = 0;
+		int a = 0, ret = 0;
+		static int retval = 0;
 
-		retval = 0;
 		mode = isatty(STDIN_FILENO);
+		/*printf("retval1 = %d\n", retval);*/
 		if (mode)
 		{
-			retval = get_prompt();
+			ret = get_prompt();
 			a = 1;
 		}
-		retval = getline(&buffer, &bytes, stdin);
-		if (retval == -1)
+		ret = getline(&buffer, &bytes, stdin);
+		if (ret == -1)
 		{
 			write(1, "\n", a);
-			getline_error_handler(buffer);
+			/*printf("retval2 = %d\n", retval);*/
+			getline_error_handler(buffer, retval);
 		}
 		buffer[_strlen(buffer) - 1] = '\0';
 		getline_cp = _strdup(buffer);
@@ -43,20 +44,23 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			tokens = word_split(getline_cp, delim);
 			free_str(buffer, getline_cp);
 			filename = _strdup(tokens[0]);
-			retvalb = exec_builtin(tokens, env, filename);
+			retvalb = exec_builtin(tokens, env, filename, argv);
+			/*if (retvalb == 2)
+				return (2);*/
 			if (retvalb == -1)
 			{
 				retval = _fork(tokens, env, argv, filename);
+			
+				free(filename);
+				free_grid(tokens, args);
+				if (retval == 127)
+					 exit(retval);
 			}
-			free(filename);
-			free_grid(tokens, args);
-			if (retval == 127)
-				 exit(retval);
 		}
 		else
 			free_str(buffer, getline_cp);
 	}
-	return (retval);
+	return (0);
 }
 
 /**
