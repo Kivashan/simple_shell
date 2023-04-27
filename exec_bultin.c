@@ -1,9 +1,11 @@
 #include "main.h"
+
 /**
  * exec_builtin - executes a builtin command via a syscall
  * @tok: user input
  * @env: environment
  * @filename: full pathname of file/command
+ * @argv: an array of pointers to strings
  *
  * Description: execute function associated with user command
  * Return: void
@@ -32,6 +34,7 @@ int exec_builtin(char **tok, char **env, char *filename, char *argv[])
  * our_exit - wrapper to exit syscall
  * @tok: unused user command for typedef compliance
  * @env: environment
+ * @argv: an array of pointers to strings
  *
  * Description: exits current process
  * Return: void
@@ -39,27 +42,26 @@ int exec_builtin(char **tok, char **env, char *filename, char *argv[])
 int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 {
 	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0, prev_er;
-	
+
 	prev_er = errno;
-	errno = 0;
-	if (!tok[1])
-	{
-		printf("erno1 = %d\n", errno);
-		printf("erno2 = %d\n", prev_er);
-		exit(prev_er);
-	}
 	while (tok[j])
 		j++;
 
+	if (!tok[1])
+	{
+		errno = 0;
+		free_grid(tok, j);
+		exit(prev_er);
+	}
+
 	if (tok[1])
-	{	
+	{
 		while (tok[1][i])
 		{
 			if ((tok[1][i] < '0') || (tok[1][i] > '9'))
 			{
 				illegal_num_error(tok, argv);
 				free_grid(tok, j);
-				printf("erno2 = %d\n", errno);
 				return (2);
 			}
 			i++;
@@ -78,14 +80,17 @@ int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 	free_grid(tok, j);
 	exit(num);
 }
+
 /**
  * print_env - print environment variables
  * @tok: unused variable holding user input
  * @env: environment
+ * @argv: an array of pointers to strings
  *
  * Description: print environment variables
  * Return: void
  */
+
 int print_env(__attribute__((unused))char **tok, char **env,
 	__attribute__((unused))char *argv[])
 
@@ -102,13 +107,25 @@ int print_env(__attribute__((unused))char **tok, char **env,
 	return (0);
 }
 
-void illegal_num_error (char **tok, char *argv[])
+/**
+ * illegal_num_error - prints error message for exit builtin failure
+ * @tok: an array of pointers to strings
+ * @argv: an array of pointers to strings
+ *
+ * Return: void
+ */
+
+void illegal_num_error(char **tok, char *argv[])
 {
 	int len = 0;
+	char i;
 
+	i = arg_count(0);
 	len = _strlen(argv[0]);
 	write(1, argv[0], len);
-	write(1, ": 1: ", 5);
+	write(1, ": ", 2);
+	write(1, &i, 1);
+	write(1, ": ", 2);
 	len = _strlen(tok[0]);
 	write(1, tok[0], len);
 	write(1, ": Illegal number: ", 18);

@@ -2,6 +2,7 @@
 /**
  * getline_error_handler - handle errors from getline & handle EOF
  * @buffer: user input
+ * @retval: return value from shell_clone.c
  *
  * Return: void
  */

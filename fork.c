@@ -31,11 +31,6 @@ int _fork(char **tokens, char **env, char **argv, char *filename)
 	{
 		if (retval == 0)
 			our_execve(tokens, env, tokens[0]);
-	/*	else
-		{
-				cmd_not_found_error(argv[0], filename);
-				exit_status = 127;
-		}*/
 	}
 	else
 		wait(&status);

@@ -42,7 +42,7 @@ typedef struct get_inbuilt
 } get_func;
 void cmd_not_found_error(char *argv, char *token);
 int _fork(char **tokens, char **env, char **argv, char *filename);
-int arg_count(void);
+char arg_count(int);
 void illegal_num_error(char **tok, char **argv);
 
 #endif
