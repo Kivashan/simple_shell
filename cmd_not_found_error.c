@@ -18,5 +18,4 @@ void cmd_not_found_error(char *argv, char *token)
 	write(1, ": 1: ", 5);
 	write(1, token, len);
 	write(1, ": not found\n", 12);
-	exit(127);
 }

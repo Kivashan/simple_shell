@@ -14,13 +14,15 @@ void free_str(char *buffer, char *getline_cp);
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
 	size_t bytes;
+	int retval = 0;
 
 	while (1)
 	{
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
-		int mode = 0, args = 0, retval = 0, retvalb = 0;
+		int mode = 0, args = 0, retvalb = 0;
 		int a = 0;
 
+		retval = 0;
 		mode = isatty(STDIN_FILENO);
 		if (mode)
 		{
@@ -39,20 +41,22 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		if (args > 1)
 		{
 			tokens = word_split(getline_cp, delim);
+			free_str(buffer, getline_cp);
 			filename = _strdup(tokens[0]);
 			retvalb = exec_builtin(tokens, env, filename);
 			if (retvalb == -1)
 			{
-				_fork(tokens, env, argv, filename);
+				retval = _fork(tokens, env, argv, filename);
 			}
 			free(filename);
 			free_grid(tokens, args);
-			free_str(buffer, getline_cp);
+			if (retval == 127)
+				 exit(retval);
 		}
 		else
 			free_str(buffer, getline_cp);
 	}
-	return (0);
+	return (retval);
 }
 
 /**

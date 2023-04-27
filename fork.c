@@ -10,9 +10,9 @@
  * Return: Void
  */
 
-void _fork(char **tokens, char **env, char **argv, char *filename)
+int _fork(char **tokens, char **env, char **argv, char *filename)
 {
-	int retval = 0, pid = 0, status;
+	int retval = 0, pid = 0, status, exit_status = 0;
 
 	retval = file_check(tokens, env);
 	pid = fork();
@@ -26,8 +26,12 @@ void _fork(char **tokens, char **env, char **argv, char *filename)
 		if (retval == 0)
 			our_execve(tokens, env, tokens[0]);
 		else
+		{
 			cmd_not_found_error(argv[0], filename);
+			exit_status = 127;
+		}
 	}
 	else
 		wait(&status);
+	return (exit_status);
 }

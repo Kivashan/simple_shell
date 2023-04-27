@@ -3,6 +3,7 @@
  * exec_builtin - executes a builtin command via a syscall
  * @tok: user input
  * @env: environment
+ * @filename: full pathname of file/command
  *
  * Description: execute function associated with user command
  * Return: void
@@ -20,7 +21,8 @@ int exec_builtin(char **tok, char **env, char *filename)
 	{
 		if ((stringcomp(inbuilt[i].cmd, tok[0])) == 0)
 		{
-			(*inbuilt[i].func)(tok, env, filename);
+			free(filename);
+			(*inbuilt[i].func)(tok, env);
 			return (0);
 		}
 	}
