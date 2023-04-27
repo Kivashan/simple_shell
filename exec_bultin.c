@@ -41,17 +41,17 @@ int exec_builtin(char **tok, char **env, char *filename, char *argv[])
  */
 int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 {
-	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0, prev_er;
+	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0, err = 0;
 
-	prev_er = errno;
 	while (tok[j])
 		j++;
 
-	if (!tok[1])
+	err = errno;
+	if (!tok[j])
 	{
 		errno = 0;
 		free_grid(tok, j);
-		exit(prev_er);
+		exit(err);
 	}
 
 	if (tok[1])
