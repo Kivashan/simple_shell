@@ -36,7 +36,7 @@ int exec_builtin(char **tok, char **env, char *filename)
  * Description: exits current process
  * Return: void
  */
-void our_exit(char **tok, __attribute__((unused))char **env, char *filename)
+void our_exit(char **tok, __attribute__((unused))char **env)
 {
 	int len = 0, i = 0, sig_fig = 1, num = 0;
 
@@ -59,7 +59,6 @@ void our_exit(char **tok, __attribute__((unused))char **env, char *filename)
 		num += (tok[1][i] - 48) * sig_fig;
 		sig_fig /= 10;
 	}
-	free(filename);
 	free_grid(tok, len);
 	exit(num);
 }
@@ -71,8 +70,8 @@ void our_exit(char **tok, __attribute__((unused))char **env, char *filename)
  * Description: print environment variables
  * Return: void
  */
-void print_env(__attribute__((unused))char **tok, char **env,
-	__attribute__((unused))char *filename)
+void print_env(__attribute__((unused))char **tok, char **env)
+	
 {
 	int i = 0, len;
 

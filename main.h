@@ -25,8 +25,8 @@ char **waymaker(int *i, char **env);
 char **abs_path(char *token[], char **env);
 int file_check(char *tokens[], char **env);
 int exec_builtin(char **, char **, char *);
-void our_exit(char **tok, char **env, char *);
-void print_env(char **, char **env, char *);
+void our_exit(char **tok, char **env);
+void print_env(char **, char **env);
 int stringcomp(char *, char *);
 int our_execve(char *tokens[], char *environ[], char *fn);
 /**
@@ -37,7 +37,7 @@ int our_execve(char *tokens[], char *environ[], char *fn);
 typedef struct get_inbuilt
 {
 	char *cmd;
-	void (*func)(char **tokens, char **env, char *);
+	void (*func)(char **tokens, char **env);
 } get_func;
 void cmd_not_found_error(char *argv, char *token);
 int _fork(char **tokens, char **env, char **argv, char *filename);
