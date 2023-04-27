@@ -22,9 +22,8 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
 		int mode = 0, args = 0;
 		int a = 0, ret = 0;
-
+	
 		mode = isatty(STDIN_FILENO);
-		/*printf("retval1 = %d\n", retval);*/
 		if (mode)
 		{
 			ret = get_prompt();
@@ -34,7 +33,6 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		if (ret == -1)
 		{
 			write(1, "\n", a);
-			/*printf("retval2 = %d\n", retval);*/
 			getline_error_handler(buffer, retvalb);
 		}
 		buffer[_strlen(buffer) - 1] = '\0';
@@ -51,7 +49,6 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 			if (retvalb == -1)
 			{
 				retval = _fork(tokens, env, argv, filename);
-			
 				free(filename);
 				free_grid(tokens, args);
 				if (retval == 127)

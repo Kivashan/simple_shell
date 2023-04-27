@@ -38,8 +38,16 @@ int exec_builtin(char **tok, char **env, char *filename, char *argv[])
  */
 int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 {
-	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0;
+	int len = 0, i = 0, sig_fig = 1, num = 0, j = 0, prev_er;
 	
+	prev_er = errno;
+	errno = 0;
+	if (!tok[1])
+	{
+		printf("erno1 = %d\n", errno);
+		printf("erno2 = %d\n", prev_er);
+		exit(prev_er);
+	}
 	while (tok[j])
 		j++;
 
@@ -51,6 +59,7 @@ int our_exit(char **tok, __attribute__((unused))char **env, char *argv[])
 			{
 				illegal_num_error(tok, argv);
 				free_grid(tok, j);
+				printf("erno2 = %d\n", errno);
 				return (2);
 			}
 			i++;

@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 int get_prompt(void);
 void getline_error_handler(char *, int);
