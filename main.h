@@ -24,7 +24,7 @@ char *_strconcat(char *str1, char *str2);
 char **waymaker(int *i, char **env);
 char **abs_path(char *token[], char **env);
 int file_check(char *tokens[], char **env);
-int exec_builtin(char **, char **);
+int exec_builtin(char **, char **, char *);
 void our_exit(char **tok, char **env);
 void print_env(char **, char **env);
 int stringcomp(char *, char *);

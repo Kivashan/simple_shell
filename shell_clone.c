@@ -41,15 +41,15 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		if (args > 1)
 		{
 			tokens = word_split(getline_cp, delim);
+			free_str(buffer, getline_cp);
 			filename = _strdup(tokens[0]);
-			retvalb = exec_builtin(tokens, env);
+			retvalb = exec_builtin(tokens, env, filename);
 			if (retvalb == -1)
 			{
 				retval = _fork(tokens, env, argv, filename);
 			}
 			free(filename);
 			free_grid(tokens, args);
-			free_str(buffer, getline_cp);
 			if (retval == 127)
 				return (retval);
 		}

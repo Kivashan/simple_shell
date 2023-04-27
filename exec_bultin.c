@@ -3,11 +3,12 @@
  * exec_builtin - executes a builtin command via a syscall
  * @tok: user input
  * @env: environment
+ * @filename: full pathname of file/command
  *
  * Description: execute function associated with user command
  * Return: void
  */
-int exec_builtin(char **tok, char **env)
+int exec_builtin(char **tok, char **env, char *filename)
 {
 	int i;
 	get_func inbuilt[] = {
@@ -20,6 +21,7 @@ int exec_builtin(char **tok, char **env)
 	{
 		if ((stringcomp(inbuilt[i].cmd, tok[0])) == 0)
 		{
+			free(filename);
 			(*inbuilt[i].func)(tok, env);
 			return (0);
 		}
@@ -34,9 +36,16 @@ int exec_builtin(char **tok, char **env)
  * Description: exits current process
  * Return: void
  */
-void our_exit(__attribute__((unused))char **tok,
+void our_exit(char **tok,
 	__attribute__((unused))char **env)
 {
+	int i = 0;
+
+	while (tok[i])
+		i++;
+
+	free_grid(tok, i);
+
 	exit(EXIT_SUCCESS);
 }
 /**
