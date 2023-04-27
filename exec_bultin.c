@@ -36,17 +36,31 @@ int exec_builtin(char **tok, char **env, char *filename)
  * Description: exits current process
  * Return: void
  */
-void our_exit(char **tok,
-	__attribute__((unused))char **env)
+void our_exit(char **tok, __attribute__((unused))char **env)
 {
-	int i = 0;
+	int len = 0, i = 0, sig_fig = 1, num = 0;
 
-	while (tok[i])
+	while (tok[1][i])
+	{
+		if ((tok[1][i] < '0') || (tok[1][i] > '9'))
+		{
+			write(1, tok[1], 10);
+			write(1, " :invalid number", 15);
+		}
 		i++;
+		len++;
+		sig_fig *= 10;
+	}
 
-	free_grid(tok, i);
+	sig_fig /= 10;
 
-	exit(2);
+	for (i = 0; tok[1][i]; i++)
+	{
+		num += (tok[1][i] - 48) * sig_fig;
+		sig_fig /= 10;
+	}
+	free_grid(tok, len);
+	exit(num);
 }
 /**
  * print_env - print environment variables
@@ -57,6 +71,7 @@ void our_exit(char **tok,
  * Return: void
  */
 void print_env(__attribute__((unused))char **tok, char **env)
+	
 {
 	int i = 0, len;
 
