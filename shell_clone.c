@@ -40,7 +40,7 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		{
 			tokens = word_split(getline_cp, delim);
 			filename = _strdup(tokens[0]);
-			retvalb = exec_builtin(tokens, env);
+			retvalb = exec_builtin(tokens, env, filename);
 			if (retvalb == -1)
 			{
 				_fork(tokens, env, argv, filename);

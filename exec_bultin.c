@@ -7,7 +7,7 @@
  * Description: execute function associated with user command
  * Return: void
  */
-int exec_builtin(char **tok, char **env)
+int exec_builtin(char **tok, char **env, char *filename)
 {
 	int i;
 	get_func inbuilt[] = {
@@ -20,7 +20,7 @@ int exec_builtin(char **tok, char **env)
 	{
 		if ((stringcomp(inbuilt[i].cmd, tok[0])) == 0)
 		{
-			(*inbuilt[i].func)(tok, env);
+			(*inbuilt[i].func)(tok, env, filename);
 			return (0);
 		}
 	}
@@ -34,7 +34,7 @@ int exec_builtin(char **tok, char **env)
  * Description: exits current process
  * Return: void
  */
-void our_exit(char **tok, __attribute__((unused))char **env)
+void our_exit(char **tok, __attribute__((unused))char **env, char *filename)
 {
 	int len = 0, i = 0, sig_fig = 1, num = 0;
 
@@ -57,7 +57,8 @@ void our_exit(char **tok, __attribute__((unused))char **env)
 		num += (tok[1][i] - 48) * sig_fig;
 		sig_fig /= 10;
 	}
-
+	free(filename);
+	free_grid(tok, len);
 	exit(num);
 }
 /**
@@ -68,7 +69,8 @@ void our_exit(char **tok, __attribute__((unused))char **env)
  * Description: print environment variables
  * Return: void
  */
-void print_env(__attribute__((unused))char **tok, char **env)
+void print_env(__attribute__((unused))char **tok, char **env,
+	__attribute__((unused))char *filename)
 {
 	int i = 0, len;
 
