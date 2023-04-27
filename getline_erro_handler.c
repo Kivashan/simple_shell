@@ -8,5 +8,7 @@
 void getline_error_handler(char *buffer, int retval)
 {
 	free(buffer);
+	if (retval != 2 && retval != 127)
+		retval = 0;
 	_exit(retval);
 }

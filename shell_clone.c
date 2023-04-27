@@ -14,6 +14,7 @@ void free_str(char *buffer, char *getline_cp);
 int main(__attribute__((unused))int argc, char *argv[], char *env[])
 {
 	size_t bytes;
+	int retval = 0;
 	int retvalb = 0;
 
 	while (1)
@@ -21,7 +22,6 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
 		int mode = 0, args = 0;
 		int a = 0, ret = 0;
-		int retval = 0;
 
 		mode = isatty(STDIN_FILENO);
 		/*printf("retval1 = %d\n", retval);*/
@@ -55,13 +55,15 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 				free(filename);
 				free_grid(tokens, args);
 				if (retval == 127)
-					 exit(retval);
+				{
+					retvalb = retval;
+				}
 			}
 		}
 		else
 			free_str(buffer, getline_cp);
 	}
-	return (retvalb);
+	return (retval);
 }
 
 /**
