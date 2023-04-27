@@ -22,7 +22,8 @@ int main(__attribute__((unused))int argc, char *argv[], char *env[])
 		char *buffer = NULL, *delim = " ", *getline_cp, **tokens = NULL, *filename;
 		int mode = 0, args = 0;
 		int a = 0, ret = 0;
-
+		
+		arg_count
 		mode = isatty(STDIN_FILENO);
 		/*printf("retval1 = %d\n", retval);*/
 		if (mode)
